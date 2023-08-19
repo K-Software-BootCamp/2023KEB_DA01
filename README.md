@@ -1,7 +1,7 @@
 # Concurrent 자료구조
 
 ## 프로젝트 소개
-자료구조의 종류인 Linked List 와 Binary Tree, Red-Black Tree 를 Concurrency (멀티 프로세싱) 을 활용해 구현하였습니다.
+자료구조의 종류인 Linked List 와 Binary Tree, Red-Black Tree 를 Concurrency (멀티 프로세싱) 을 활용해 구현
 <br>
 
 ## 개발 기간
