@@ -106,7 +106,7 @@ int main() {
                     break;
                 }
             }
-            if (isSame1 == 0) {      // 중복인 경우 거르고 insert
+            if (isSame1 == 0) {      // 중복인 경우 거르고 delete
                 arr1[count1] = tmp1;
                 dll.deleteNode(arr1[count1]);
                 count1++;
@@ -130,7 +130,7 @@ int main() {
                     break;
                 }
             }
-            if (isSame2 == 0) {      // 중복인 경우 거르고 insert
+            if (isSame2 == 0) {     
                 arr2[count2] = tmp2;
                 dll.deleteNode(arr2[count2]);
                 count2++;
@@ -154,7 +154,7 @@ int main() {
                     break;
                 }
             }
-            if (isSame3 == 0) {      // 중복인 경우 거르고 insert
+            if (isSame3 == 0) {    
                 arr3[count3] = tmp3;
                 dll.deleteNode(arr3[count3]);
                 count3++;
@@ -177,7 +177,7 @@ int main() {
                     break;
                 }
             }
-            if (isSame4 == 0) {      // 중복인 경우 거르고 insert
+            if (isSame4 == 0) {   
                 arr4[count4] = tmp4;
                 dll.deleteNode(arr4[count4]);
                 count4++;
@@ -240,7 +240,7 @@ int main() {
                     break;
                 }
             }
-            if (isSame6 == 0) {      // 중복인 경우 거르고 insert
+            if (isSame6 == 0) {     
                 arr6[count6] = tmp6;
                 dll.insertNode(arr6[count6]);
                 count6++;
@@ -263,7 +263,7 @@ int main() {
                     break;
                 }
             }
-            if (isSame7 == 0) {      // 중복인 경우 거르고 insert
+            if (isSame7 == 0) {   
                 arr7[count7] = tmp7;
                 dll.insertNode(arr7[count7]);
                 count7++;
@@ -285,7 +285,7 @@ int main() {
                     break;
                 }
             }
-            if (isSame8 == 0) {      // 중복인 경우 거르고 insert
+            if (isSame8 == 0) {    
                 arr8[count8] = tmp8;
                 dll.insertNode(arr8[count8]);
                 count8++;
