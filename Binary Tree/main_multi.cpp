@@ -132,6 +132,7 @@ int main()
     long double deletetotaltime = 0;
     long double deletemeantime = 0;
 
+    deletestart = clock();
     thread thread1([&obj]() // 숫자 변경
                    {
                     for (int j = 0; j < 500; j++){
@@ -192,8 +193,6 @@ int main()
                         }
                     } });
 
-    deletestart = clock();
-
     thread1.join();
     thread2.join();
     thread3.join();
@@ -206,8 +205,6 @@ int main()
 
     // delete 시간 계산
     deleteduration = (long double)(deleteend - deletestart) / CLOCKS_PER_SEC; // 걸린 시간
-
-    cout << "Delete Total Time = " << deleteduration << endl;
 
     /*
         int threadcnt = 0;
@@ -252,6 +249,7 @@ int main()
     clock_t insertstart, insertend;
     double insertduration;
 
+    insertstart = clock();
     thread thread5([&obj]() // 숫자 변경
                    {
                        for (int j = 0; j < 500; j++)
@@ -301,7 +299,6 @@ int main()
                             cout << "thread 8 working " << '\n'; // 숫자 변경
                         
                         } });
-    insertstart = clock();
 
     thread5.join();
     thread6.join();
@@ -312,7 +309,9 @@ int main()
     // insert 멀티스레드 시간 계산
     insertduration = (long double)(insertend - insertstart) / CLOCKS_PER_SEC; // 걸린 시간
 
-    cout << "Insert Total Time = " << insertduration;
+    cout << "Delete Total Time = " << deleteduration << endl;
+
+    cout << "Insert Total Time = " << insertduration << endl;
 
     return 0;
 }
