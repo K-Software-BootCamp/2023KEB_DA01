@@ -44,7 +44,7 @@ public:
         }
     }
 
-    void insertNode(TreeNode *new_node) // 삽입노트 멤버함수 , 새로운 객체노드 포인터를 받음
+    void insertNode(TreeNode *new_node) // 삽입노드 멤버함수 , 새로운 객체노드 포인터를 받음
     {
         if (root == NULL) // 루트 노드가 비어있으면 , 루트에 받은 노드의 값을 넣음
         {
@@ -56,22 +56,25 @@ public:
             TreeNode *temp = root;
             while (temp != NULL) // temp 값을 반환할 때까지 계속 반복
             {
-                if (new_node->value == temp->value) // 새로받은
+                if (new_node->value == temp->value) // 새로받은 노드값이 본래 루트노드값이랑 같으면 안 받음.
                 {
                     cout << "Value Already exist,"
                          << "Insert another value!" << endl;
                     return;
                 }
+                // 새 노드값이 루트노드값보다 작고 왼쪽자식이 없으면 왼쪽자식에 삽입
                 else if ((new_node->value < temp->value) && (temp->left == NULL))
                 {
                     temp->left = new_node;
                     cout << "Value Inserted to the left!" << endl;
                     break;
                 }
+                // 새 노드값이 루트 노드값보다 작기만 하다면
                 else if (new_node->value < temp->value)
-                {
+                { // 원래 왼쪽자식을 받음
                     temp = temp->left;
                 }
+                // 새 노드값이 루트노드값보다 크고 오른쪽 자식이 없으면 오른쪽 자식에 삽입
                 else if ((new_node->value > temp->value) && (temp->right == NULL))
                 {
                     temp->right = new_node;
@@ -85,6 +88,7 @@ public:
             }
         }
     }
+    //
     TreeNode *insertRecursive(TreeNode *r, TreeNode *new_node)
     {
         if (r == NULL)
