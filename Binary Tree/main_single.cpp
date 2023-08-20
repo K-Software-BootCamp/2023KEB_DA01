@@ -80,7 +80,7 @@ int main()
 
         // 탐색시작
         searchstart = clock();
-        new_node = obj.recursiveSingleThread(obj.root, singlethreadnum); // 살짝 이해안됨
+        new_node = obj.recursiveSearch(obj.root, singlethreadnum); // 살짝 이해안됨
         if (new_node != NULL)
         {
             cout << "Value found" << endl;
@@ -127,67 +127,59 @@ int main()
     // 싱글스레드 실행
     // 삽입 . 삭제 2000번
 
+    clock_t starttime,endtime;
+
     int threadcnt = 0;
     long double threadmintime, threadmaxtime;
     long double threadtotaltime = 0;
     long double threadmeantime = 0;
 
+    searchstart = clock();
     while (threadcnt < 2000)
     {
-        searchStart = clock();
+        starttime = clock(); 
 
-        thread thread1([&obj]() // 숫자 변경
-                       {
-                    for (int j = 0; j < 2000; j++){
-                        int i = rand() % 5000+1; // 숫자 변경
-                        TreeNode *new_node = new_node;
-                        new_node = obj.iterativeSingleThread(i);
-                        if(new_node != NULL){
-                            
-                        unique_lock<mutex> lock(mtx);
-                        obj.deleteNode(obj.root, i);
-                        
-                        cout << "delete working " << '\n'; // 숫자 변경
-                        }
-                    } 
-                    for (int j = 0; j < 2000; j++)
-                       {
-                           int i = rand() % 8750 + 5001;
-                           TreeNode *new_node1 = new TreeNode();
-                           new_node1->value = i;
-                           unique_lock<mutex> lock(mtx);
-                           obj.insertRecursive(obj.root, new_node1);
-                           cout << "insert working " << '\n'; // 숫자 변경
-                       } });
+        int i = rand() % 5000 + 1; // 숫자 변경
+        TreeNode *new_node = new_node;
+        new_node = obj.iterativeSearch(i);
+        if(new_node != NULL){
+            obj.deleteNode(obj.root, i);
+            cout << "Delete Success!" << endl;
+        }
+    
+        int k = rand() % 5000 + 5001;
+        TreeNode *new_node1 = new TreeNode();
+        new_node1->value = k;
+        obj.insertRecursive(obj.root, new_node1);
+    
+        endtime = clock();
+
+        searchduration = (long double)(endtime - starttime) / CLOCKS_PER_SEC; // 싱글스레드 걸린 시간
+
+        if (threadcnt == 0)
+        {
+            threadmintime = searchduration;
+            threadmaxtime = searchduration;
+        }
+
+        else
+        {
+            if (threadmintime > searchduration)
+            {
+                threadmintime = searchduration;
+            }
+            else if (threadmaxtime < searchduration)
+            {
+                threadmaxtime = searchduration;
+            }
+        }
+
+        threadtotaltime += searchduration;
+
         threadcnt++;
     };
 
-    thread1.join();
-    searchend = clock();
-
-    searchduration = (long double)(searchend - searchstart) / CLOCKS_PER_SEC; // 싱글스레드 걸린 시간
-
-    if (threadcnt == 0)
-    {
-        threadmintime = searchduration;
-        threadmaxtime = searchduration;
-    }
-
-    else
-    {
-        if (threadmintime > searchduration)
-        {
-            threadmintime = searchduration;
-        }
-        else if (threadmaxtime < searchduration)
-        {
-            threadmaxtime = searchduration;
-        }
-    }
-
-    totaltime += searchduration;
-
-    threadmeantime = totaltime / (threadcnt + 1);
+    threadmeantime = threadtotaltime / (threadcnt + 1);
 
     cout << "minimum time of SingleThread : " << fixed << threadmintime << "초\n";
     cout << "maximum time of SingleThread : " << threadmaxtime << "초\n";
