@@ -6,6 +6,7 @@
 #include <time.h>
 #include <mutex>
 #include <vector>
+
 using namespace std;
 /*
 뮤텍스 추가 생성
@@ -71,6 +72,7 @@ int main()
     long double totaltime = 0;
     long double meantime = 0;
 
+    cout << "---------------Search Start------------------" << endl;
     // 100번 탐색
     while (searchcnt < 100)
     {
@@ -79,6 +81,7 @@ int main()
         int singlethreadnum = rand() % 5000 + 1;
 
         // 탐색시작
+
         searchstart = clock();
         new_node = obj.recursiveSearch(obj.root, singlethreadnum); // 살짝 이해안됨
         if (new_node != NULL)
@@ -90,6 +93,7 @@ int main()
             cout << "Value NOT found" << endl;
         }
         searchend = clock();
+
         // 탐색 끝
         searchduration = (long double)(searchend - searchstart) /
                          CLOCKS_PER_SEC; // 걸린 시간
@@ -117,6 +121,7 @@ int main()
         searchcnt++;
     }
     // 100번 탐색 종료
+    cout << "---------------Search End------------------" << endl;
     meantime = totaltime / (searchcnt + 1);
 
     cout << "minimum time of SingleThread : " << fixed << mintime << "초\n";
@@ -127,30 +132,36 @@ int main()
     // 싱글스레드 실행
     // 삽입 . 삭제 2000번
 
-    clock_t starttime,endtime;
+    clock_t starttime, endtime;
 
     int threadcnt = 0;
     long double threadmintime, threadmaxtime;
     long double threadtotaltime = 0;
     long double threadmeantime = 0;
-
+    cout << "---------------Single Thread Start------------------" << endl;
+    searchstart = clock();
     while (threadcnt < 2000)
     {
-        starttime = clock(); 
+        starttime = clock();
 
         int i = rand() % 5000 + 1; // 숫자 변경
+        cout << "           | delete randomnum : " << i << "           \n"
+             << endl;
         TreeNode *new_node = new_node;
         new_node = obj.iterativeSearch(i);
-        if(new_node != NULL){
+        if (new_node != NULL)
+        {
             obj.deleteNode(obj.root, i);
             cout << "Delete Success!" << endl;
         }
-    
+
         int k = rand() % 5000 + 5001;
+        cout << "           | insert ramdomnum : " << i << "           \n"
+             << endl;
         TreeNode *new_node1 = new TreeNode();
         new_node1->value = k;
         obj.insertRecursive(obj.root, new_node1);
-    
+
         endtime = clock();
 
         searchduration = (long double)(endtime - starttime) / CLOCKS_PER_SEC; // 싱글스레드 걸린 시간
@@ -178,6 +189,7 @@ int main()
         threadcnt++;
     };
 
+    cout << "---------------Single Thread End------------------" << endl;
     threadmeantime = threadtotaltime / (threadcnt + 1);
 
     cout << "minimum time of SingleThread : " << fixed << threadmintime << "초\n";

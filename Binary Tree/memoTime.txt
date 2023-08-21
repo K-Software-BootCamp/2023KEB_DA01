@@ -1,0 +1,11 @@
+시간기록
+멀티스레드 
+1. 난수 25만 중 5만 뽑기 
+Delete Total Time = 1.599739
+Insert Total Time = 3.083037
+
+싱글스레드 
+
+1. 난수 1-90만 , 100만-200만 중 threadcnt 5만
+singlethread Total Time = 0.000008
+

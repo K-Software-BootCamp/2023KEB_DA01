@@ -3,5 +3,8 @@
         "thread": "cpp",
         "iostream": "cpp",
         "random": "cpp"
+        "__mutex_base": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp"
     }
 }
