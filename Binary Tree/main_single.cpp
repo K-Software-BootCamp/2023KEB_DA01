@@ -6,6 +6,8 @@
 #include <time.h>
 #include <mutex>
 #include <vector>
+#include <random>
+#include <functional>
 
 using namespace std;
 /*
@@ -18,6 +20,7 @@ mutex mtx;
 // voidserchValuesTest.cpp
 
 //
+
 int main()
 {
     BST obj;
@@ -26,15 +29,16 @@ int main()
     vector<int> arr;
     // int arr[2000];
 
-    srand((unsigned int)time(NULL));
+    mt19937 engine((unsigned int)time(NULL));
+    uniform_int_distribution<int> distribution(1, 1000000);
     //  cout << "from clock_gettime" << tp << endl;
     int count = 0;
-    clock_t searchstart, searchend;
-    double searchduration;
-
-    while (count < 2000)
+    clock_t makestart, makeend;
+    double maketime;
+    makestart = clock();
+    while (count < 400000)
     {
-        int tmp = rand() % 5000 + 1;
+        int tmp = distribution(engine);
         int isSame = 0;
 
         for (int i = 0; i < arr.size(); i++) // vector 변경지점
@@ -53,7 +57,7 @@ int main()
     } // 벡터 어레이 생성
     // 이진트리 만들기
     int insertcount = 0; // 어레이 값 트리에 넣어주기
-    while (insertcount < 2000)
+    while (insertcount < 400000)
     {
         TreeNode *new_node = new TreeNode();
         new_node->value = arr[insertcount]; // 새 노드에 어레이 값 넣기
@@ -61,6 +65,9 @@ int main()
         obj.root = obj.insertRecursive(obj.root, new_node); //
         insertcount++;
     }
+    makeend = clock();
+
+    maketime = (double)(makeend - makestart) / CLOCKS_PER_SEC;
 
     cout << "Binary Tree:" << endl;
     obj.print2D(obj.root, 3);
@@ -68,22 +75,27 @@ int main()
     // 탐색
     int searchcnt = 0;
 
-    long double mintime, maxtime;
-    long double totaltime = 0;
-    long double meantime = 0;
+    clock_t searchstart, searchend;
+
+    double mintime, maxtime;
+    double searchduration;
+    double totaltime = 0;
+    double meantime = 0;
 
     cout << "---------------Search Start------------------" << endl;
     // 100번 탐색
-    while (searchcnt < 100)
+    while (searchcnt < 100000)
     {
+        uniform_int_distribution<int> searchdistribution(0, 399999);
+        int searchidx = searchdistribution(engine);
+        int searchnum = distribution(engine);
+
         TreeNode *new_node = new TreeNode();
-        int singlethreadidx = rand() % 2000;
-        int singlethreadnum = rand() % 5000 + 1;
 
         // 탐색시작
 
         searchstart = clock();
-        new_node = obj.recursiveSearch(obj.root, singlethreadnum); // 살짝 이해안됨
+        new_node = obj.recursiveSearch(obj.root, searchnum); // 살짝 이해안됨
         if (new_node != NULL)
         {
             cout << "Value found" << endl;
@@ -95,7 +107,7 @@ int main()
         searchend = clock();
 
         // 탐색 끝
-        searchduration = (long double)(searchend - searchstart) /
+        searchduration = (double)(searchend - searchstart) /
                          CLOCKS_PER_SEC; // 걸린 시간
 
         if (searchcnt == 0)
@@ -121,32 +133,28 @@ int main()
         searchcnt++;
     }
     // 100번 탐색 종료
-    cout << "---------------Search End------------------" << endl;
+
     meantime = totaltime / (searchcnt + 1);
 
-    cout << "minimum time of SingleThread : " << fixed << mintime << "초\n";
-    cout << "maximum time of SingleThread : " << maxtime << "초\n";
-    cout << "total time of SingleThread : " << totaltime << "초\n";
-    cout << "average time of SingleThread : " << meantime << "초\n";
+    cout << "---------------Search End------------------" << endl;
 
     // 싱글스레드 실행
-    // 삽입 . 삭제 2000번
+    // 삽입 . 삭제 50000번
 
-    clock_t starttime, endtime;
+    clock_t delstart, delend, insertstart, insertend;
+    int delcnt = 0;
+    int insertcnt = 0;
+    double deltime;
+    double inserttime;
 
-    int threadcnt = 0;
-    long double threadmintime, threadmaxtime;
-    long double threadtotaltime = 0;
-    long double threadmeantime = 0;
     cout << "---------------Single Thread Start------------------" << endl;
-    searchstart = clock();
-    while (threadcnt < 2000)
-    {
-        starttime = clock();
 
-        int i = rand() % 5000 + 1; // 숫자 변경
-        cout << "           | delete randomnum : " << i << "           \n"
-             << endl;
+    delstart = clock();
+    while (delcnt < 200000)
+    {
+        uniform_int_distribution<int> deldistribution(1, 1000000);
+        int i = deldistribution(engine);
+        // cout << "           | delete randomnum : " << i << "           \n"<< endl;
         TreeNode *new_node = new_node;
         new_node = obj.iterativeSearch(i);
         if (new_node != NULL)
@@ -154,48 +162,40 @@ int main()
             obj.deleteNode(obj.root, i);
             cout << "Delete Success!" << endl;
         }
+        delcnt++;
+    }
+    delend = clock();
+    deltime = (double)(delend - delstart) / CLOCKS_PER_SEC;
 
-        int k = rand() % 5000 + 5001;
-        cout << "           | insert ramdomnum : " << i << "           \n"
-             << endl;
+    insertstart = clock();
+    while (insertcnt < 200000)
+    {
+        uniform_int_distribution<int> insdistribution(1000001, 2000000);
+        int k = insdistribution(engine);
+        // cout << "           | insert ramdomnum : " << i << "           \n"
+        //      << endl;
         TreeNode *new_node1 = new TreeNode();
         new_node1->value = k;
         obj.insertRecursive(obj.root, new_node1);
 
-        endtime = clock();
+        insertcnt++;
+    }
+    insertend = clock();
+    inserttime = (double)(insertend - insertstart) / CLOCKS_PER_SEC;
 
-        searchduration = (long double)(endtime - starttime) / CLOCKS_PER_SEC; // 싱글스레드 걸린 시간
+    // insertduration = (double)(insertend - insertstart) / CLOCKS_PER_SEC;   // 걸린 시간
+    // deleteduration = (double)(insertend - insertstart) / CLOCKS_PER_SEC;   // 걸린 시간
 
-        if (threadcnt == 0)
-        {
-            threadmintime = searchduration;
-            threadmaxtime = searchduration;
-        }
+    cout << "Making Time : " << fixed << maketime << "\n";
+    cout << "search Total Time = " << searchduration << endl;
+    cout << "minimum time of SingleThread : " << mintime << "초\n";
+    cout << "maximum time of SingleThread : " << maxtime << "초\n";
+    cout << "total time of SingleThread : " << totaltime << "초\n";
+    cout << "average time of SingleThread : " << meantime << "초\n";
 
-        else
-        {
-            if (threadmintime > searchduration)
-            {
-                threadmintime = searchduration;
-            }
-            else if (threadmaxtime < searchduration)
-            {
-                threadmaxtime = searchduration;
-            }
-        }
-
-        threadtotaltime += searchduration;
-
-        threadcnt++;
-    };
-
+    cout << "delete Time : " << deltime << "초\n";
+    cout << "insert time : " << inserttime << "초\n";
     cout << "---------------Single Thread End------------------" << endl;
-    threadmeantime = threadtotaltime / (threadcnt + 1);
-
-    cout << "minimum time of SingleThread : " << fixed << threadmintime << "초\n";
-    cout << "maximum time of SingleThread : " << threadmaxtime << "초\n";
-    cout << "total time of SingleThread : " << threadtotaltime << "초\n";
-    cout << "average time of SingleThread : " << threadmeantime << "초\n";
     return 0;
 }
 

@@ -40,7 +40,7 @@ int main()
     double duration;
 
     // start = clock();
-    while (count < 50000)
+    while (count < 400000)
     {
         int tmp = distribution(engine);
         int isSame = 0;
@@ -61,7 +61,7 @@ int main()
     } // 벡터 어레이 생성
     // 이진트리 만들기
     int insertcount = 0; // 어레이 값 트리에 넣어주기
-    while (insertcount < 2000)
+    while (insertcount < 50000)
     {
         TreeNode *new_node = new TreeNode();
         new_node->value = arr[insertcount]; // 새 노드에 어레이 값 넣기
