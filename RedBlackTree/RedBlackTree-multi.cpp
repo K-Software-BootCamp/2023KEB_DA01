@@ -6,6 +6,8 @@
 #include <mutex>
 #include <thread>
 #include <vector>
+#include <random>
+#include <functional>
 #include "RBTree.hpp"
 #include "SpinLock.hpp"
 
@@ -15,6 +17,9 @@ mutex mt;
 Spinlock locker;
 
 bool isUseMutex;
+
+mt19937 engine(GetTickCount());                    // MT19937 난수 엔진
+uniform_int_distribution<int> distribution(1, 90000);
 
 RedBlackTree<int> rbTree;
 
@@ -29,8 +34,9 @@ int main() {
     double duration;
 
     start = clock();
-    while(count < 2000){
-        int tmp = rand() % 5000 + 1;
+    while(count < 50000){
+        int tmp = distribution(engine);
+        // int tmp = (int)(((double)((rand()<<15) | rand())) / (((RAND_MAX<<15) | RAND_MAX) + 1) * (90000))+1;
         int isSame = 0;
         for (int i = 0; i < treeData.size(); i++){
             if(tmp == treeData[i]){
@@ -61,9 +67,10 @@ int main() {
     double meantime = 0;
 
 
-    while(searchcnt < 100){
-        int searchidx = rand() % 2000;
-        int searchnum = rand() % 5000+1;
+    while(searchcnt < 30000){
+        uniform_int_distribution<int> searchdistribution(0, 49999);
+        int searchidx = searchdistribution(engine);
+        int searchnum = distribution(engine);
 
         start = clock();
         rbTree.search(searchnum); // 배열 index로 할꺼면 searchnum 대신에 treeData[searchidx]
@@ -103,8 +110,10 @@ int main() {
 
     erasestart = clock();
     thread thread1([&](){
-        for(int i = 0; i < 500; i++){
-            int key = rand() % 5000 +1;
+        mt19937 engine(GetTickCount());  
+        uniform_int_distribution<int> deldistribution(1, 90000);
+        for(int i = 0; i < 25000; i++){
+            int key = deldistribution(engine);
             if (isUseMutex) mt.lock();
             else locker.Lock();
 
@@ -116,8 +125,10 @@ int main() {
     });
 
     thread thread2([&](){
-        for(int i = 0; i < 500; i++){
-            int key = rand() % 5000 +1;
+        mt19937 engine(GetTickCount());  
+        uniform_int_distribution<int> deldistribution(1, 90000);
+        for(int i = 0; i < 25000; i++){
+            int key = deldistribution(engine);
             if (isUseMutex) mt.lock();
             else locker.Lock();
 
@@ -129,8 +140,10 @@ int main() {
     });
 
     thread thread3([&](){
-        for(int i = 0; i < 500; i++){
-            int key = rand() % 5000 +1;
+        mt19937 engine(GetTickCount());  
+        uniform_int_distribution<int> deldistribution(1, 90000);
+        for(int i = 0; i < 25000; i++){
+            int key = deldistribution(engine);
             if (isUseMutex) mt.lock();
             else locker.Lock();
 
@@ -142,8 +155,10 @@ int main() {
     });
 
     thread thread4([&](){
-        for(int i = 0; i < 500; i++){
-            int key = rand() % 5000 +1;
+        mt19937 engine(GetTickCount());  
+        uniform_int_distribution<int> deldistribution(1, 90000);
+        for(int i = 0; i < 25000; i++){
+            int key = deldistribution(engine);
             if (isUseMutex) mt.lock();
             else locker.Lock();
 
@@ -164,8 +179,8 @@ int main() {
 
     insertstart = clock();
     thread thread5([&](){
-        for (int i = 0; i < 500; i++) {
-            int key = rand()%1250 + 5001;
+        for (int i = 0; i < 20000; i++) {
+            int key = (int)(((double)((rand()<<15) | rand())) / (((RAND_MAX<<15) | RAND_MAX) + 1) * (25000)) + 100001;
             if (isUseMutex) mt.lock();
             else locker.Lock();
 
@@ -177,8 +192,8 @@ int main() {
     });
 
     thread thread6([&](){
-        for (int i = 0; i < 500; i++) {
-            int key = rand()%1250 + 6251;
+        for (int i = 0; i < 20000; i++) {
+            int key = (int)(((double)((rand()<<15) | rand())) / (((RAND_MAX<<15) | RAND_MAX) + 1) * (25000)) + 125001;
             if (isUseMutex) mt.lock();
             else locker.Lock();
 
@@ -190,8 +205,8 @@ int main() {
     });
 
     thread thread7([&](){
-        for (int i = 0; i < 500; i++) {
-            int key = rand()%1250 + 7501;
+        for (int i = 0; i < 20000; i++) {
+            int key = (int)(((double)((rand()<<15) | rand())) / (((RAND_MAX<<15) | RAND_MAX) + 1) * (25000)) + 150001;
             if (isUseMutex) mt.lock();
             else locker.Lock();
 
@@ -203,8 +218,8 @@ int main() {
     });
 
     thread thread8([&](){
-        for (int i = 0; i < 500; i++) {
-            int key = rand()%1250 + 8751;
+        for (int i = 0; i < 20000; i++) {
+            int key = (int)(((double)((rand()<<15) | rand())) / (((RAND_MAX<<15) | RAND_MAX) + 1) * (25000)) + 175001;
             if (isUseMutex) mt.lock();
             else locker.Lock();
 

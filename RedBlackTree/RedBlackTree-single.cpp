@@ -1,66 +1,32 @@
 ﻿#include <iostream>
+#include <random>
 #include <cstdlib>
 #include <ctime>
 #include <windows.h>
-#include <atomic>
-#include <mutex>
-#include <thread>
 #include <vector>
+#include <functional>
 #include "RBTree.hpp"
-#include "SpinLock.hpp"
-
-#define ITER_TIME 10000000
-#define THREAD_COUNT 1
-#define TRY_TIME 100
 
 using namespace std;
 
-mutex mt;
-Spinlock locker;
-
-bool isUseMutex;
 int threadcount;
 
+mt19937 engine(GetTickCount());                    // MT19937 난수 엔진
+uniform_int_distribution<int> distribution(1, 90000);
+
 RedBlackTree<int> rbTree;
-
-void insertInSafely(int key) {
-    for (int i = 0; i < ITER_TIME; ++i) {
-        if (isUseMutex) mt.lock();
-        else locker.Lock();
-
-        rbTree.insert(key);
-
-        if (isUseMutex) mt.unlock();
-        else locker.Unlock();
-    }
-}
-
-void eraseInSafely(int key) {
-    for (int i = 0; i < ITER_TIME; ++i) {
-        if (isUseMutex) mt.lock();
-        else locker.Lock();
-
-        rbTree.erase(key);
-
-        if (isUseMutex) mt.unlock();
-        else locker.Unlock();
-    }
-
-}
 
 int main() {
     
     vector<int> treeData;
-
-    srand(GetTickCount());
 
     int count = 0;
     clock_t start, end;
     double duration;
 
     start = clock();
-    while(count < 2000){
-        int tmp = rand() % 5000 + 1;
+    while(count < 50000){
+        int tmp = distribution(engine);
         int isSame = 0;
         for (int i = 0; i < treeData.size(); i++){
             if(tmp == treeData[i]){
@@ -91,9 +57,10 @@ int main() {
     double meantime = 0;
 
 
-    while(searchcnt < 100){
-        int searchidx = rand() % 2000;
-        int searchnum = rand() % 5000+1;
+    while(searchcnt < 20000){
+        uniform_int_distribution<int> searchdistribution(0, 49999);
+        int searchidx = searchdistribution(engine);
+        int searchnum = distribution(engine);
 
         start = clock();
         rbTree.search(searchnum); // 배열 index로 할꺼면 searchnum 대신에 treeData[searchidx]
@@ -132,9 +99,9 @@ int main() {
     int singlethreadrun = 0;
     double singleruntime;
     start1 = clock();
-    while (singlethreadrun<1000){
-        int deltmp = rand()%5000 + 1;
-        int instmp = rand()%5000 + 5001;
+    while (singlethreadrun<30000){
+        int deltmp = distribution(engine);
+        int instmp = distribution(engine)+100000;
 
         rbTree.erase(deltmp);
         rbTree.insert(instmp);

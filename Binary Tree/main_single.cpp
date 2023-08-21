@@ -134,7 +134,6 @@ int main()
     long double threadtotaltime = 0;
     long double threadmeantime = 0;
 
-    searchstart = clock();
     while (threadcnt < 2000)
     {
         starttime = clock(); 
