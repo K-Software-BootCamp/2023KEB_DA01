@@ -127,7 +127,7 @@ int main()
     // 싱글스레드 실행
     // 삽입 . 삭제 2000번
 
-    clock_t starttime,endtime;
+    clock_t starttime, endtime;
 
     int threadcnt = 0;
     long double threadmintime, threadmaxtime;
@@ -136,21 +136,22 @@ int main()
 
     while (threadcnt < 2000)
     {
-        starttime = clock(); 
+        starttime = clock();
 
         int i = rand() % 5000 + 1; // 숫자 변경
         TreeNode *new_node = new_node;
         new_node = obj.iterativeSearch(i);
-        if(new_node != NULL){
+        if (new_node != NULL)
+        {
             obj.deleteNode(obj.root, i);
             cout << "Delete Success!" << endl;
         }
-    
+
         int k = rand() % 5000 + 5001;
         TreeNode *new_node1 = new TreeNode();
         new_node1->value = k;
         obj.insertRecursive(obj.root, new_node1);
-    
+
         endtime = clock();
 
         searchduration = (long double)(endtime - starttime) / CLOCKS_PER_SEC; // 싱글스레드 걸린 시간

@@ -31,7 +31,7 @@ int main()
     clock_t start, end;
     double duration;
 
-    start = clock();
+    // start = clock();
     while (count < 2000)
     {
         int tmp = rand() % 5000 + 1;
@@ -64,6 +64,7 @@ int main()
 
     cout << "Binary Tree:" << endl;
     obj.print2D(obj.root, 3);
+    cout << "/////////// Binary Tree Complete //////////" << endl;
 
     // 탐색
     int searchcnt = 0;
@@ -78,6 +79,8 @@ int main()
         TreeNode *new_node = new TreeNode();
         int searchidx = rand() % 2000;
         int searchnum = rand() % 5000 + 1;
+        cout << "           | searchnum " << searchnum << "|           " << endl;
+        cout << "----------- Binary Tree Search Start -----------" << endl;
 
         // 탐색시작
         start = clock();
@@ -91,6 +94,8 @@ int main()
             cout << "Value NOT found" << endl;
         }
         end = clock();
+        cout << "----------- Binary Tree Search End -----------" << endl;
+
         // 탐색 끝
         duration = (long double)(end - start) / CLOCKS_PER_SEC; // 걸린 시간
 
@@ -132,11 +137,15 @@ int main()
     long double deletetotaltime = 0;
     long double deletemeantime = 0;
 
+    cout << "----------- Binary Tree delete Start -----------" << endl;
+
     deletestart = clock();
-    thread thread1([&obj]() // 숫자 변경
+    thread thread1([&obj]()
                    {
                     for (int j = 0; j < 500; j++){
                         int i = rand() % 1250 + 1; // 숫자 변경
+                        cout << "           | random 1 : " << i << "           " << endl;
+
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
                         if(new_node != NULL){
@@ -148,10 +157,11 @@ int main()
                         }
                     } });
 
-    thread thread2([&obj]() // 숫자 변경
+    thread thread2([&obj]()
                    {
                        for (int j = 0; j < 500; j++){
                         int i = rand() % 1250 + 1251; // 숫자 변경
+                        cout << "           | random 2 : " << i << "           \n" << endl;
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
                         if(new_node != NULL){
@@ -163,10 +173,11 @@ int main()
                         }
                     } });
 
-    thread thread3([&obj]() // 숫자 변경
+    thread thread3([&obj]()
                    {
                        for (int j = 0; j < 500; j++){
                         int i = rand() % 1250 + 2501; // 숫자 변경
+                        cout << "           | random3 : " << i << "           \n" << endl;
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
                         if(new_node != NULL){
@@ -178,10 +189,11 @@ int main()
                         }
                     } });
 
-    thread thread4([&obj]() // 숫자 변경
+    thread thread4([&obj]()
                    {
                        for (int j = 0; j < 500; j++){
                         int i = rand() % 1250 + 3751; // 숫자 변경
+                        cout << "           | random 4 : " << i << "           \n" << endl;
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
                         if(new_node != NULL){
@@ -199,9 +211,8 @@ int main()
     thread4.join();
 
     deleteend = clock();
-
-    cout << "delete 진행 완료\n"<< endl;
-
+    cout << "----------- Binary Tree delete End -----------\n"
+         << endl;
 
     // delete 시간 계산
     deleteduration = (long double)(deleteend - deletestart) / CLOCKS_PER_SEC; // 걸린 시간
@@ -250,11 +261,13 @@ int main()
     double insertduration;
 
     insertstart = clock();
-    thread thread5([&obj]() // 숫자 변경
+    thread thread5([&obj]()
                    {
                        for (int j = 0; j < 500; j++)
                        {
                            int i = rand() % 1250 + 5001;
+                        cout << "           | random 1 : " << i << "           \n" << endl;
+
                            TreeNode *new_node1 = new TreeNode();
                            new_node1->value = i;
                            unique_lock<mutex> lock(mtx);
@@ -262,10 +275,11 @@ int main()
                            cout << "thread 5 working " << '\n'; // 숫자 변경
                        } });
 
-    thread thread6([&obj]() // 숫자 변경
+    thread thread6([&obj]()
                    {
                         for(int j=0;j<500;j++){
                         int i = rand() % 1250 + 6251;
+                         cout << "           | random 2 : " << i << "           \n" << endl;
                             TreeNode *new_node2 = new TreeNode();
                             new_node2->value = i;
                             unique_lock<mutex> lock(mtx);
@@ -274,10 +288,11 @@ int main()
 
                         } });
 
-    thread thread7([&obj]() // 숫자 변경
+    thread thread7([&obj]()
                    {
                         for(int j=0;j<500;j++){
                         int i = rand() % 1250 + 7501;
+                         cout << "           | random 3 : " << i << "           \n" << endl;
                             TreeNode *new_node3 = new TreeNode();
                             new_node3->value = i;
                             
@@ -287,10 +302,11 @@ int main()
                         
                         } });
 
-    thread thread8([&obj]() // 숫자 변경
+    thread thread8([&obj]()
                    {
                         for(int j=0;j<500;j++){
                         int i = rand() % 5000 + 8751;
+                         cout << "           | random 4 : " << i << "           \n" << endl;
                             TreeNode *new_node4 = new TreeNode();
                             new_node4->value = i;
                             
@@ -313,5 +329,6 @@ int main()
 
     cout << "Insert Total Time = " << insertduration << endl;
 
+    cout << "------------------------------------------------------------------" << endl;
     return 0;
 }
