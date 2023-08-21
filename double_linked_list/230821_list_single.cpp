@@ -163,7 +163,7 @@ int main(void) {
     while (count2 < 20000) {
         int tmp = dis2(gen);
 
-        dll.deleteNode(tmp);
+        dll.insertNode(tmp);
 
         count2++;
     }
@@ -184,11 +184,11 @@ int main(void) {
     cout << "total time of search : " << totaltime << "段\n";
     cout << "average time of search : " << meantime << "段\n";
 
-
+    cout << '\n\n\n\n';
     cout << "Time of single generation list : " << fixed << duration << "段\n";
     cout << "Time of single delete list : " << duration2 << "段\n";
     cout << "Time of additional insert list : " << duration3 << "段\n";
-    cout << '\n\n\n\n';
+    
 
     return 0;
 }
