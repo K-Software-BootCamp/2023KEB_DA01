@@ -6,6 +6,13 @@
 #include <time.h>
 #include <mutex>
 #include <vector>
+#include <random>
+#include <functional>
+
+mt19937 engine((unsigned int)time(NULL));
+// MT19937 난수 엔진
+uniform_int_distribution<int> distribution(1, 90000);
+
 using namespace std;
 /*
 뮤텍스 추가 생성
@@ -17,6 +24,7 @@ mutex mtx;
 // voidserchValuesTest.cpp
 
 //
+
 int main()
 {
     BST obj;
@@ -32,9 +40,9 @@ int main()
     double duration;
 
     // start = clock();
-    while (count < 2000)
+    while (count < 50000)
     {
-        int tmp = rand() % 5000 + 1;
+        int tmp = distribution(engine);
         int isSame = 0;
 
         for (int i = 0; i < arr.size(); i++) // vector 변경지점
@@ -74,11 +82,12 @@ int main()
     long double meantime = 0;
 
     // 100번 탐색
-    while (searchcnt < 100)
+    while (searchcnt < 30000)
     {
         TreeNode *new_node = new TreeNode();
-        int searchidx = rand() % 2000;
-        int searchnum = rand() % 5000 + 1;
+        uniform_int_distribution<int> searchdistribution(0, 49999);
+        int searchidx = searchdistribution(engine);
+        int searchnum = distribution(engine);
         cout << "           | searchnum " << searchnum << "|           " << endl;
         cout << "----------- Binary Tree Search Start -----------" << endl;
 
@@ -142,9 +151,12 @@ int main()
     deletestart = clock();
     thread thread1([&obj]()
                    {
-                    for (int j = 0; j < 500; j++){
-                        int i = rand() % 1250 + 1; // 숫자 변경
-                        cout << "           | random 1 : " << i << "           " << endl;
+                    mt19937 engine((unsigned int)time(NULL));
+                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        
+                    for (int j = 0; j < 25000; j++){
+                          int i = deldistribution(engine); // 숫자 변경
+                        cout << "           | random 1 : " << j << "           " << endl;
 
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
@@ -159,8 +171,12 @@ int main()
 
     thread thread2([&obj]()
                    {
-                       for (int j = 0; j < 500; j++){
-                        int i = rand() % 1250 + 1251; // 숫자 변경
+                       mt19937 engine((unsigned int)time(NULL));
+                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        
+                    for (int j = 0; j < 25000; j++){
+                          int i = deldistribution(engine); // 숫자 변경
+                   
                         cout << "           | random 2 : " << i << "           \n" << endl;
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
@@ -175,8 +191,12 @@ int main()
 
     thread thread3([&obj]()
                    {
-                       for (int j = 0; j < 500; j++){
-                        int i = rand() % 1250 + 2501; // 숫자 변경
+                       mt19937 engine((unsigned int)time(NULL));
+                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        
+                    for (int j = 0; j < 25000; j++){
+                          int i = deldistribution(engine); // 숫자 변경
+                    
                         cout << "           | random3 : " << i << "           \n" << endl;
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
@@ -191,8 +211,11 @@ int main()
 
     thread thread4([&obj]()
                    {
-                       for (int j = 0; j < 500; j++){
-                        int i = rand() % 1250 + 3751; // 숫자 변경
+                   mt19937 engine((unsigned int)time(NULL));
+                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        
+                    for (int j = 0; j < 25000; j++){
+                          int i = deldistribution(engine); // 숫자 변경
                         cout << "           | random 4 : " << i << "           \n" << endl;
                         TreeNode *new_node = new_node;
                         new_node = obj.iterativeSearch(i);
@@ -263,10 +286,11 @@ int main()
     insertstart = clock();
     thread thread5([&obj]()
                    {
-                       for (int j = 0; j < 500; j++)
+                    mt19937 engine((unsigned int)time(NULL));
+                    uniform_int_distribution<int> insdistribution(1000001, 1250000);
+                       for (int j = 0; j < 50000; j++)
                        {
-                           int i = rand() % 1250 + 5001;
-                        cout << "           | random 1 : " << i << "           \n" << endl;
+                           int i = insdistribution(engine);
 
                            TreeNode *new_node1 = new TreeNode();
                            new_node1->value = i;
@@ -277,9 +301,12 @@ int main()
 
     thread thread6([&obj]()
                    {
-                        for(int j=0;j<500;j++){
-                        int i = rand() % 1250 + 6251;
-                         cout << "           | random 2 : " << i << "           \n" << endl;
+                         mt19937 engine((unsigned int)time(NULL));
+                    uniform_int_distribution<int> insdistribution(1250001, 1500000);
+                       for (int j = 0; j < 50000; j++)
+                       {
+                           int i = insdistribution(engine);
+                   
                             TreeNode *new_node2 = new TreeNode();
                             new_node2->value = i;
                             unique_lock<mutex> lock(mtx);
@@ -290,9 +317,11 @@ int main()
 
     thread thread7([&obj]()
                    {
-                        for(int j=0;j<500;j++){
-                        int i = rand() % 1250 + 7501;
-                         cout << "           | random 3 : " << i << "           \n" << endl;
+                      mt19937 engine((unsigned int)time(NULL));
+                    uniform_int_distribution<int> insdistribution(1500001,  1750000);
+                       for (int j = 0; j < 50000; j++)
+                       {
+                           int i = insdistribution(engine);
                             TreeNode *new_node3 = new TreeNode();
                             new_node3->value = i;
                             
@@ -304,9 +333,11 @@ int main()
 
     thread thread8([&obj]()
                    {
-                        for(int j=0;j<500;j++){
-                        int i = rand() % 5000 + 8751;
-                         cout << "           | random 4 : " << i << "           \n" << endl;
+                   mt19937 engine((unsigned int)time(NULL));
+                    uniform_int_distribution<int> insdistribution(1750001, 2000000);
+                       for (int j = 0; j < 50000; j++)
+                       {
+                           int i = insdistribution(engine);
                             TreeNode *new_node4 = new TreeNode();
                             new_node4->value = i;
                             
