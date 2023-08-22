@@ -38,6 +38,8 @@
         - Lock-Free Linked Lists and Skip Lists (Mikhail Fomitchev, Eric Ruppert, York University, 2003) 
         - Double Linked list concurrency 적용 사례 : https://github.com/sysprog21/concurrent-ll        
     - Binary Tree 관련
+        - Binary Tree 설명 및 구현 영상 : https://youtu.be/V97oYgN9cIE, https://youtu.be/zUt2KB2hTQg
+        - Binary Tree 이론 및 코드 관련 기사 : https://simplesnippets.tech/what-is-binary-search-tree-bst-with-full-code-dsa/
 
     - Redblack Tree 관련
 
@@ -59,6 +61,7 @@
             - Parrallel - 병렬 프로그래밍 : https://www.youtube.com/watch?v=6LWuhlID_-s&list=PLDV-cCQnUlIZ7KbIe9sOMbjwETX1uwCxW
             - Atomic 아토믹 소개 : https://www.youtube.com/@user-pw9fm4gc7e
             - Conroutines 코루틴 소개 : https://www.youtube.com/playlist?list=PLDV-cCQnUlIYc1FGC6FJRdHgPucxb7bzp
+            - Multi process/thread 멀티 프로세스/스레드 소개 : https://youtu.be/QmtYKZC0lMU
         
         - Concurrent Linked List : https://www.youtube.com/watch?v=eB0AlnK8iRI
 
