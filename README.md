@@ -36,7 +36,7 @@
 - 자료구조 관련 
     - Linked List 관련
         - Lock-Free Linked Lists and Skip Lists (Mikhail Fomitchev, Eric Ruppert, York University, 2003) 
-
+        - Double Linked list concurrency 적용 사례 : https://github.com/sysprog21/concurrent-ll        
     - Binary Tree 관련
 
     - Redblack Tree 관련
