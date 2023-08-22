@@ -40,7 +40,7 @@ int main()
     double duration;
 
     // start = clock();
-    while (count < 50000)
+    while (count < 400000)
     {
         int tmp = distribution(engine);
         int isSame = 0;
@@ -61,7 +61,7 @@ int main()
     } // 벡터 어레이 생성
     // 이진트리 만들기
     int insertcount = 0; // 어레이 값 트리에 넣어주기
-    while (insertcount < 2000)
+    while (insertcount < 400000)
     {
         TreeNode *new_node = new TreeNode();
         new_node->value = arr[insertcount]; // 새 노드에 어레이 값 넣기
@@ -82,13 +82,13 @@ int main()
     long double meantime = 0;
 
     // 100번 탐색
-    while (searchcnt < 30000)
+    while (searchcnt < 100000)
     {
         TreeNode *new_node = new TreeNode();
-        uniform_int_distribution<int> searchdistribution(0, 49999);
+        uniform_int_distribution<int> searchdistribution(0, 399999);
         int searchidx = searchdistribution(engine);
         int searchnum = distribution(engine);
-        cout << "           | searchnum " << searchnum << "|           " << endl;
+        // cout << "           | searchnum " << searchnum << "|           " << endl;
         cout << "----------- Binary Tree Search Start -----------" << endl;
 
         // 탐색시작
@@ -152,9 +152,9 @@ int main()
     thread thread1([&obj]()
                    {
                     mt19937 engine((unsigned int)time(NULL));
-                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        uniform_int_distribution<int> deldistribution(1, 1000000);
                         
-                    for (int j = 0; j < 25000; j++){
+                    for (int j = 0; j < 50000; j++){
                           int i = deldistribution(engine); // 숫자 변경
                         cout << "           | random 1 : " << j << "           " << endl;
 
@@ -172,9 +172,9 @@ int main()
     thread thread2([&obj]()
                    {
                        mt19937 engine((unsigned int)time(NULL));
-                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        uniform_int_distribution<int> deldistribution(1, 1000000);
                         
-                    for (int j = 0; j < 25000; j++){
+                    for (int j = 0; j < 50000; j++){
                           int i = deldistribution(engine); // 숫자 변경
                    
                         cout << "           | random 2 : " << i << "           \n" << endl;
@@ -192,9 +192,9 @@ int main()
     thread thread3([&obj]()
                    {
                        mt19937 engine((unsigned int)time(NULL));
-                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        uniform_int_distribution<int> deldistribution(1, 1000000);
                         
-                    for (int j = 0; j < 25000; j++){
+                    for (int j = 0; j < 50000; j++){
                           int i = deldistribution(engine); // 숫자 변경
                     
                         cout << "           | random3 : " << i << "           \n" << endl;
@@ -212,9 +212,9 @@ int main()
     thread thread4([&obj]()
                    {
                    mt19937 engine((unsigned int)time(NULL));
-                        uniform_int_distribution<int> deldistribution(1, 90000);
+                        uniform_int_distribution<int> deldistribution(1, 1000000);
                         
-                    for (int j = 0; j < 25000; j++){
+                    for (int j = 0; j < 50000; j++){
                           int i = deldistribution(engine); // 숫자 변경
                         cout << "           | random 4 : " << i << "           \n" << endl;
                         TreeNode *new_node = new_node;
@@ -287,7 +287,7 @@ int main()
     thread thread5([&obj]()
                    {
                     mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1000001, 125000);
+                    uniform_int_distribution<int> insdistribution(1000001, 1250000);
                        for (int j = 0; j < 50000; j++)
                        {
                            int i = insdistribution(engine);
@@ -302,7 +302,7 @@ int main()
     thread thread6([&obj]()
                    {
                          mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1250001, 375000);
+                    uniform_int_distribution<int> insdistribution(1250001, 1500000);
                        for (int j = 0; j < 50000; j++)
                        {
                            int i = insdistribution(engine);
@@ -318,7 +318,7 @@ int main()
     thread thread7([&obj]()
                    {
                       mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1500001, 625000);
+                    uniform_int_distribution<int> insdistribution(1500001, 1750000);
                        for (int j = 0; j < 50000; j++)
                        {
                            int i = insdistribution(engine);
@@ -334,7 +334,7 @@ int main()
     thread thread8([&obj]()
                    {
                    mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1750001, 875000);
+                    uniform_int_distribution<int> insdistribution(1750001, 2000000);
                        for (int j = 0; j < 50000; j++)
                        {
                            int i = insdistribution(engine);
