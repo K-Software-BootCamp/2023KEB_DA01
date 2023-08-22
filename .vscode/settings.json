@@ -2,7 +2,7 @@
     "files.associations": {
         "thread": "cpp",
         "iostream": "cpp",
-        "random": "cpp"
+        "random": "cpp",
         "__mutex_base": "cpp",
         "ostream": "cpp",
         "iostream": "cpp"
