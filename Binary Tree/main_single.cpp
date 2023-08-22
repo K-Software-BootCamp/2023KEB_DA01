@@ -35,7 +35,6 @@ int main()
     int count = 0;
     clock_t makestart, makeend;
     double maketime;
-    makestart = clock();
     while (count < 400000)
     {
         int tmp = distribution(engine);
@@ -57,6 +56,7 @@ int main()
     } // 벡터 어레이 생성
     // 이진트리 만들기
     int insertcount = 0; // 어레이 값 트리에 넣어주기
+    makestart = clock();
     while (insertcount < 400000)
     {
         TreeNode *new_node = new TreeNode();
