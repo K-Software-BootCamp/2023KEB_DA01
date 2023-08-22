@@ -41,7 +41,9 @@
         - Binary Tree 설명 및 구현 영상 : https://youtu.be/V97oYgN9cIE, https://youtu.be/zUt2KB2hTQg
         - Binary Tree 이론 및 코드 관련 기사 : https://simplesnippets.tech/what-is-binary-search-tree-bst-with-full-code-dsa/
 
-    - Redblack Tree 관련
+    - Redblack Tree 관련 
+        - 레드-블랙 트리 개념과 도식화 : https://www.youtube.com/watch?v=qvZGUFHWChY
+        - 레드-블랙 트리 CAS 적용 : Lock-Free Red-Black Trees Using CAS (Jong Ho Kim, Helen Cameron, Peter Graham, 2011)
 
 - Concurreny(동시성) 관련 
     - 영상 참고 
