@@ -49,17 +49,9 @@ int main() {
         }
     }
 
-    makestart = clock();
     for(int i = 0; i < 400000; i++){
         rbTree.insert(treeData[i]);
     }
-    makeend = clock();
-
-    makeduration = (double)(makeend - makestart) / CLOCKS_PER_SEC;
-
-    cout << "Red-Black Tree:" << endl;
-    rbTree.printTree(rbTree.getRoot());
-    cout << "Time of generation tree : " << makeduration << "초\n";
 
     clock_t erasestart, eraseend, insertstart, insertend;
     double erasemultiruntime, insertmultiruntime;
@@ -202,8 +194,8 @@ int main() {
 
     insertmultiruntime = (double)(insertend - insertstart)/CLOCKS_PER_SEC;
 
-    cout << fixed << erasemultiruntime << '\n';
-    cout << insertmultiruntime << '\n';
+    cout << "Red-Black Tree (Single-Thread) Delete TotalTime : " << erasemultiruntime << "초\n";
+    cout << "Red-Black Tree (Single-Thread) Insert Total Time : " << insertmultiruntime << "초\n";
     
     return 0;
 }

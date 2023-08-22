@@ -73,7 +73,7 @@ int main(){
     long double deletetotaltime = 0;
     long double deletemeantime = 0;
 
-    cout << "----------- Binary Tree delete Start -----------" << endl;
+    //cout << "----------- Binary Tree delete Start -----------" << endl;
 
     deletestart = clock();
     thread thread1([&obj]()
@@ -82,16 +82,14 @@ int main(){
                         uniform_int_distribution<int> deldistribution(1, 1000000);
                         
                         for (int j = 0; j < 50000; j++){
-                            int i = deldistribution(engine); // 숫자 변경
-                            cout << "           | random 1 : " << j << "           " << endl;
-
+                            int i = deldistribution(engine);
+                            unique_lock<mutex> lock(mtx);
                             TreeNode *new_node = new_node;
                             new_node = obj.iterativeSearch(i);
                             if(new_node != NULL){  
-                                unique_lock<mutex> lock(mtx);
-                                obj.deleteNode(obj.root, i);
                                 
-                                cout << "thread 1 working " << '\n'; // 숫자 변경
+                                obj.deleteNode(obj.root, i);
+                                //cout << "delete" << endl;
                             }
                         } 
                     });
@@ -102,17 +100,15 @@ int main(){
                         uniform_int_distribution<int> deldistribution(1, 1000000);
                         
                         for (int j = 0; j < 50000; j++){
-                            int i = deldistribution(engine); // 숫자 변경
-                        
-                            cout << "           | random 2 : " << i << "           \n" << endl;
+                            int i = deldistribution(engine);
+                            unique_lock<mutex> lock(mtx);
                             TreeNode *new_node = new_node;
                             new_node = obj.iterativeSearch(i);
                             if(new_node != NULL){
                                 
-                                unique_lock<mutex> lock(mtx);
                                 obj.deleteNode(obj.root, i);
+                                //cout << "delete" << endl;
                                 
-                                cout << "thread 2 working " << '\n'; // 숫자 변경
                             }
                         } 
                     });
@@ -123,17 +119,14 @@ int main(){
                         uniform_int_distribution<int> deldistribution(1, 1000000);
                         
                         for (int j = 0; j < 50000; j++){
-                            int i = deldistribution(engine); // 숫자 변경
-                        
-                            cout << "           | random3 : " << i << "           \n" << endl;
+                            int i = deldistribution(engine);
+                            
+                            unique_lock<mutex> lock(mtx);
                             TreeNode *new_node = new_node;
                             new_node = obj.iterativeSearch(i);
                             if(new_node != NULL){
-                                
-                                unique_lock<mutex> lock(mtx);
                                 obj.deleteNode(obj.root, i);
-                                
-                                cout << "thread 3 working " << '\n'; // 숫자 변경
+                                //cout << "delete" << endl;
                             }
                         } 
                     });
@@ -144,17 +137,15 @@ int main(){
                         uniform_int_distribution<int> deldistribution(1, 1000000);
                         
                         for (int j = 0; j < 50000; j++){
-                            int i = deldistribution(engine); // 숫자 변경
-                            cout << "           | random 4 : " << i << "           \n" << endl;
+                            int i = deldistribution(engine);
+                            unique_lock<mutex> lock(mtx);
                             TreeNode *new_node = new_node;
                             new_node = obj.iterativeSearch(i);
                             if(new_node != NULL){
                                 
-                                unique_lock<mutex> lock(mtx);
                                 obj.deleteNode(obj.root, i);
-                                
-                                cout << "thread 4 working " << '\n'; // 숫자 변경
-                                }
+                                //cout << "delete" << endl;
+                            }
                         } 
                     });
 
@@ -164,8 +155,7 @@ int main(){
     thread4.join();
 
     deleteend = clock();
-    cout << "----------- Binary Tree delete End -----------\n"
-            << endl;
+    //cout << "----------- Binary Tree delete End -----------\n" << endl;
 
     // delete 시간 계산
     deleteduration = (long double)(deleteend - deletestart) / CLOCKS_PER_SEC; // 걸린 시간
@@ -216,64 +206,62 @@ int main(){
     insertstart = clock();
     thread thread5([&obj]()
                     {
-                    mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1000001, 1250000);
+                        mt19937 engine((unsigned int)time(NULL));
+                        uniform_int_distribution<int> insdistribution(1000001, 1250000);
                         for (int j = 0; j < 50000; j++)
                         {
                             int i = insdistribution(engine);
+                            unique_lock<mutex> lock(mtx);
 
                             TreeNode *new_node1 = new TreeNode();
                             new_node1->value = i;
-                            unique_lock<mutex> lock(mtx);
                             obj.insertRecursive(obj.root, new_node1);
-                            cout << "thread 5 working " << '\n'; // 숫자 변경
+                            // cout << "thread 5 working " << '\n'; // 숫자 변경
                         } });
 
     thread thread6([&obj]()
                     {
-                            mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1250001, 1500000);
+                        mt19937 engine((unsigned int)time(NULL));
+                        uniform_int_distribution<int> insdistribution(1250001, 1500000);
                         for (int j = 0; j < 50000; j++)
                         {
                             int i = insdistribution(engine);
+                            unique_lock<mutex> lock(mtx);
                     
                             TreeNode *new_node2 = new TreeNode();
                             new_node2->value = i;
-                            unique_lock<mutex> lock(mtx);
                             obj.insertRecursive(obj.root, new_node2);
-                            cout << "thread 6 working " << '\n'; // 숫자 변경
+                            // cout << "thread 6 working " << '\n'; // 숫자 변경
 
                         } });
 
     thread thread7([&obj]()
                     {
                         mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1500001, 1750000);
+                        uniform_int_distribution<int> insdistribution(1500001, 1750000);
                         for (int j = 0; j < 50000; j++)
                         {
                             int i = insdistribution(engine);
+                            unique_lock<mutex> lock(mtx);
                             TreeNode *new_node3 = new TreeNode();
                             new_node3->value = i;
-                            
-                            unique_lock<mutex> lock(mtx);
                             obj.insertRecursive(obj.root, new_node3);
-                            cout << "thread 7 working " << '\n'; // 숫자 변경
+                            // cout << "thread 7 working " << '\n'; // 숫자 변경
                         
                         } });
 
     thread thread8([&obj]()
                     {
-                    mt19937 engine((unsigned int)time(NULL));
-                    uniform_int_distribution<int> insdistribution(1750001, 2000000);
+                        mt19937 engine((unsigned int)time(NULL));
+                        uniform_int_distribution<int> insdistribution(1750001, 2000000);
                         for (int j = 0; j < 50000; j++)
                         {
                             int i = insdistribution(engine);
+                            unique_lock<mutex> lock(mtx);
                             TreeNode *new_node4 = new TreeNode();
                             new_node4->value = i;
-                            
-                            unique_lock<mutex> lock(mtx);
                             obj.insertRecursive(obj.root, new_node4);
-                            cout << "thread 8 working " << '\n'; // 숫자 변경
+                            // cout << "thread 8 working " << '\n'; // 숫자 변경
                         
                         } });
 
@@ -286,9 +274,9 @@ int main(){
     // insert 멀티스레드 시간 계산
     insertduration = (long double)(insertend - insertstart) / CLOCKS_PER_SEC; // 걸린 시간
 
-    cout << "Delete Total Time = " << deleteduration << "초" << endl;
+    cout << "Binary Tree (Multi-Thread) Delete Total Time = " << deleteduration << "초" << endl;
 
-    cout << "Insert Total Time = " << insertduration << "초" << endl;
+    cout << "Binary Tree (Multi-Thread) Insert Total Time = " << insertduration << "초" << endl;
 
     cout << "------------------------------------------------------------------" << endl;
     return 0;

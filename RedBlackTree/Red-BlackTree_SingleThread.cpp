@@ -21,10 +21,9 @@ int main() {
     vector<int> treeData;
 
     int count = 0;
-    clock_t start, end;
-    double duration;
+    clock_t makestart, makeend;
+    double makeduration;
 
-    start = clock();
     while(count < 400000){
         int tmp = distribution(engine);
         int isSame = 0;
@@ -37,13 +36,16 @@ int main() {
         
         if(isSame == 0){
             treeData.push_back(tmp);
-            rbTree.insert(treeData[count]);
             count++;
         }
     }
-    end = clock();
+    makestart = clock();
+    for(int i = 0; i < treeData.size();i++){
+        rbTree.insert(treeData[i]);
+    }
+    makeend = clock();
 
-    duration = (double)(end - start) / CLOCKS_PER_SEC;
+    makeduration = (double)(makeend - makestart) / CLOCKS_PER_SEC;
 
     int searchcnt = 0;
 
@@ -52,7 +54,6 @@ int main() {
     double mintime, maxtime;
     double totaltime = 0;
     double meantime = 0;
-
 
     while(searchcnt < 100000){
         uniform_int_distribution<int> searchdistribution(0, 399999);
@@ -90,50 +91,45 @@ int main() {
     clock_t delstart, delend, insstart, insend;
     int delrun = 0;
     int insertrun = 0;
-    double delruntime = 0;
-    double insertruntime = 0;
+    double delduration;
+    double insduration;
 
+    delstart = clock();
     while (delrun<200000){
 
         int deltmp = distribution(engine);
-        delstart = clock();
 
         rbTree.erase(deltmp);
-
-        delend = clock();
-
-        delruntime += (double)(delend-delstart)/CLOCKS_PER_SEC;
 
         delrun++;
     }
     delend = clock();
 
-    
+    delduration = (double)(delend-delstart)/CLOCKS_PER_SEC;
+
+    insstart = clock();    
     while (insertrun<200000){
         uniform_int_distribution<int> insertdistribution(1000001, 2000000);
         int instmp = insertdistribution(engine);
-        insstart = clock();
-        rbTree.insert(instmp);
-        insend = clock();
 
-        insertruntime += (double)(insend-insstart)/CLOCKS_PER_SEC;
+        rbTree.insert(instmp);
 
         insertrun++;
     }
-
-
+    insend = clock();
+    insduration = (double)(insend - insstart)/CLOCKS_PER_SEC;
 
     cout << "Red-Black Tree:" << endl;
-    rbTree.printTree(rbTree.getRoot());
-    cout << "Time of generation tree : " << duration << "초\n";
+    // rbTree.printTree(rbTree.getRoot());
 
-    cout << "minimum time of search : " <<fixed<< mintime << "초\n";
-    cout << "maximum time of search : " << maxtime << "초\n";
-    cout << "total time of search : " << totaltime << "초\n";
-    cout << "average time of search : " << meantime << "초\n";
+    cout << "Red-Black Tree Making Time : " << fixed << makeduration << "초\n";
+    cout << "Red-Black Tree Minimum Time of Search : " << mintime << "초\n";
+    cout << "Red-Black Tree Maximum Time of Search : " << maxtime << "초\n";
+    cout << "Red-Black Tree Total Time of Search : " << totaltime << "초\n";
+    cout << "Red-Black Tree Average Time of Search : " << meantime << "초\n";
 
-    cout << delruntime << "초\n";    
-    cout << insertruntime<< "초";
+    cout << "Red-Black Tree (Single-Thread) Delete TotalTime : " << delduration << "초\n";
+    cout << "Red-Black Tree (Single-Thread) Insert Total Time : " << insduration << "초\n";
 
     return 0;
 }

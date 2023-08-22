@@ -49,7 +49,6 @@ public:
         if (root == NULL) // 루트 노드가 비어있으면 , 루트에 받은 노드의 값을 넣음
         {
             root = new_node;
-            cout << "Value Inserted as root node!" << endl;
         }
         else // 루트 노드가 비어있지 않으면, 임시 객체를 가리키는 temp 포인터를 만들어서 루트 노드 값을 임시로 넣어둠.
         {
@@ -58,15 +57,12 @@ public:
             {
                 if (new_node->value == temp->value) // 새로받은 노드값이 본래 루트노드값이랑 같으면 안 받음.
                 {
-                    cout << "Value Already exist,"
-                         << "Insert another value!" << endl;
                     return;
                 }
                 // 새 노드값이 루트노드값보다 작고 왼쪽자식이 없으면 왼쪽자식에 삽입
                 else if ((new_node->value < temp->value) && (temp->left == NULL))
                 {
                     temp->left = new_node;
-                    cout << "Value Inserted to the left!" << endl;
                     break;
                 }
                 // 새 노드값이 루트 노드값보다 작기만 하다면
@@ -78,7 +74,6 @@ public:
                 else if ((new_node->value > temp->value) && (temp->right == NULL))
                 {
                     temp->right = new_node;
-                    cout << "Value Inserted to the right!" << endl;
                     break;
                 }
                 else
@@ -94,7 +89,6 @@ public:
         if (r == NULL)
         {
             r = new_node;
-            cout << "Insertion successful" << endl;
             return r;
         }
 
@@ -108,7 +102,6 @@ public:
         }
         else
         {
-            cout << "No duplicate values allowed!" << endl;
             return r;
         }
         return r;

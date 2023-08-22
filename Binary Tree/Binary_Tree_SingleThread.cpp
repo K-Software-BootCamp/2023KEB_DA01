@@ -70,7 +70,7 @@ int main()
     maketime = (double)(makeend - makestart) / CLOCKS_PER_SEC;
 
     cout << "Binary Tree:" << endl;
-    obj.print2D(obj.root, 3);
+    // obj.print2D(obj.root, 3);
 
     // 탐색
     int searchcnt = 0;
@@ -82,7 +82,7 @@ int main()
     double totaltime = 0;
     double meantime = 0;
 
-    cout << "---------------Search Start------------------" << endl;
+    //cout << "---------------Search Start------------------" << endl;
     // 100번 탐색
     while (searchcnt < 100000)
     {
@@ -98,17 +98,16 @@ int main()
         new_node = obj.recursiveSearch(obj.root, searchnum); // 살짝 이해안됨
         if (new_node != NULL)
         {
-            cout << "Value found" << endl;
+            // cout << "Value found" << endl;
         }
         else
         {
-            cout << "Value NOT found" << endl;
+            // cout << "Value NOT found" << endl;
         }
         searchend = clock();
 
         // 탐색 끝
-        searchduration = (double)(searchend - searchstart) /
-                         CLOCKS_PER_SEC; // 걸린 시간
+        searchduration = (double)(searchend - searchstart) /CLOCKS_PER_SEC; // 걸린 시간
 
         if (searchcnt == 0)
         {
@@ -136,7 +135,7 @@ int main()
 
     meantime = totaltime / (searchcnt + 1);
 
-    cout << "---------------Search End------------------" << endl;
+    //cout << "---------------Search End------------------" << endl;
 
     // 싱글스레드 실행
     // 삽입 . 삭제 50000번
@@ -147,7 +146,7 @@ int main()
     double deltime;
     double inserttime;
 
-    cout << "---------------Single Thread Start------------------" << endl;
+    //cout << "---------------Single Thread Start------------------" << endl;
 
     delstart = clock();
     while (delcnt < 200000)
@@ -160,7 +159,7 @@ int main()
         if (new_node != NULL)
         {
             obj.deleteNode(obj.root, i);
-            cout << "Delete Success!" << endl;
+            // cout << "Delete Success!" << endl;
         }
         delcnt++;
     }
@@ -186,16 +185,15 @@ int main()
     // insertduration = (double)(insertend - insertstart) / CLOCKS_PER_SEC;   // 걸린 시간
     // deleteduration = (double)(insertend - insertstart) / CLOCKS_PER_SEC;   // 걸린 시간
 
-    cout << "Making Time : " << fixed << maketime << "\n";
-    cout << "search Total Time = " << searchduration << endl;
-    cout << "minimum time of SingleThread : " << mintime << "초\n";
-    cout << "maximum time of SingleThread : " << maxtime << "초\n";
-    cout << "total time of SingleThread : " << totaltime << "초\n";
-    cout << "average time of SingleThread : " << meantime << "초\n";
+    cout << "Binary Tree Making Time : " << fixed << maketime << "초\n";
+    cout << "Binary Tree Minimum Time of Search : " << mintime << "초\n";
+    cout << "Binary Tree Maximum Time of Search : " << maxtime << "초\n";
+    cout << "Binary Tree Total Time of Search : " << totaltime << "초\n";
+    cout << "Binary Tree Average Time of Search : " << meantime << "초\n";
 
-    cout << "delete Time : " << deltime << "초\n";
-    cout << "insert time : " << inserttime << "초\n";
-    cout << "---------------Single Thread End------------------" << endl;
+    cout << "Binary Tree (Single-Thread) Delete TotalTime : " << deltime << "초\n";
+    cout << "Binary Tree (Single-Thread) Insert Total Time : " << inserttime << "초\n";
+    //cout << "---------------Single Thread End------------------" << endl;
     return 0;
 }
 
