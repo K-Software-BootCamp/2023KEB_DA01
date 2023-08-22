@@ -35,6 +35,7 @@
 
 - 자료구조 관련 
     - Linked List 관련
+        -Lock-Free Linked Lists and Skip Lists (Mikhail Fomitchev, Eric Ruppert, York University, 2003) 
 
     - Binary Tree 관련
 
