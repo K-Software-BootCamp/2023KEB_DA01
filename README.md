@@ -35,7 +35,7 @@
 
 - 자료구조 관련 
     - Linked List 관련
-        -Lock-Free Linked Lists and Skip Lists (Mikhail Fomitchev, Eric Ruppert, York University, 2003) 
+        - Lock-Free Linked Lists and Skip Lists (Mikhail Fomitchev, Eric Ruppert, York University, 2003) 
 
     - Binary Tree 관련
 
@@ -69,8 +69,6 @@
         - C++ 멀티스레딩 프로그래밍 : https://junstar92.tistory.com/336, https://junstar92.tistory.com/337
         - 아토믹 관련 : https://junstar92.tistory.com/298
         - [운영체제] Concurrency(동시성)과 Parallelism(병렬성) 이해 : https://spacebike.tistory.com/22
-
-- 
 
 ## Acknowledgement
 ```
