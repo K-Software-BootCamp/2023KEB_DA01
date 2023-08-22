@@ -194,8 +194,8 @@ int main() {
 
     insertmultiruntime = (double)(insertend - insertstart)/CLOCKS_PER_SEC;
 
-    cout << "Red-Black Tree (Single-Thread) Delete TotalTime : " << erasemultiruntime << "초\n";
-    cout << "Red-Black Tree (Single-Thread) Insert Total Time : " << insertmultiruntime << "초\n";
+    cout << "Red-Black Tree (Multi-Thread) Delete TotalTime : " << erasemultiruntime << "초\n";
+    cout << "Red-Black Tree (Multi-Thread) Insert Total Time : " << insertmultiruntime << "초\n";
     
     return 0;
 }
