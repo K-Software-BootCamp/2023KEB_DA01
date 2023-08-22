@@ -274,10 +274,10 @@ int main(){
     // insert 멀티스레드 시간 계산
     insertduration = (long double)(insertend - insertstart) / CLOCKS_PER_SEC; // 걸린 시간
 
-    cout << "Binary Tree (Multi-Thread) Delete Total Time = " << deleteduration << "초" << endl;
+    cout << "Binary Tree (Multi-Thread) Delete Total Time : " << deleteduration << "초" << endl;
 
-    cout << "Binary Tree (Multi-Thread) Insert Total Time = " << insertduration << "초" << endl;
+    cout << "Binary Tree (Multi-Thread) Insert Total Time : " << insertduration << "초" << endl;
 
-    cout << "------------------------------------------------------------------" << endl;
+    // cout << "------------------------------------------------------------------" << endl;
     return 0;
 }

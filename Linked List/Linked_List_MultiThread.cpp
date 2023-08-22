@@ -81,7 +81,6 @@ int main(void) {
         while (count2 < 50000) {
             int tmp = dis(gen);
         
-
             dll.deleteNode(tmp);
 
             count2++;
@@ -98,7 +97,6 @@ int main(void) {
         while (count3 < 50000) {
             int tmp = dis(gen);
 
-
             dll.deleteNode(tmp);
 
             count3++;
@@ -113,7 +111,6 @@ int main(void) {
 
         while (count4 < 50000) {
             int tmp = dis(gen);
-
 
             dll.deleteNode(tmp);
 
@@ -145,7 +142,6 @@ int main(void) {
 
         while (count5 < 50000) {
             int tmp = dis(gen);
-
 
             dll.insertNode(tmp);
 
@@ -182,7 +178,6 @@ int main(void) {
         while (count7 < 50000) {
             int tmp = dis(gen);
 
-
             dll.insertNode(tmp);
 
             count7++;
@@ -196,7 +191,6 @@ int main(void) {
 
         while (count8 < 50000) {
             int tmp = dis(gen);
-
 
             dll.insertNode(tmp);
 

@@ -287,9 +287,9 @@ public:
     void search(const KeyType& key) {
         Node<KeyType>* result = searchNode(root, key);
         if (result != nullptr) {
-            cout << "Node with key " << key << " found in the tree." << endl;
+            // cout << "Node with key " << key << " found in the tree." << endl;
         } else {
-            cout << "Node with key " << key << " not found in the tree." << endl;
+            // cout << "Node with key " << key << " not found in the tree." << endl;
         }
     }
 

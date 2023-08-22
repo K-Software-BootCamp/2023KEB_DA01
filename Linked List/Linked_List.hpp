@@ -29,7 +29,7 @@ private:
     Node<T>* head;
     Node<T>* tail;
     mutex listMtx;
-    condition_variable cv;
+    /*condition_variable cv;*/
 
 public:
     DoublyLinkedList() : head(nullptr), tail(nullptr) {}
@@ -39,9 +39,9 @@ public:
         Node<T>* newNode = new Node<T>(value);
 
         unique_lock<mutex> lock(listMtx);
-        while (tail && tail->mark) {
+        /*while (tail && tail->mark) {
             cv.wait(lock, [this]() { return !tail->mark; });
-        }
+        }*/
 
         if (!head) {
             head = newNode;
@@ -52,7 +52,7 @@ public:
             tail->next = newNode;
             tail = newNode;
         }
-        cv.notify_all();  // Notify other threads waiting on the condition variable
+        /*cv.notify_all();  // Notify other threads waiting on the condition variable*/
     }
 
 
@@ -62,9 +62,9 @@ public:
     void deleteNode(T value) {
         {
             std::unique_lock<std::mutex> lock(listMtx);
-            while (tail && tail->mark) {
+            /*while (tail && tail->mark) {
                 cv.wait(lock, [this]() { return !tail->mark; });
-            }
+            }*/
             Node<T>* current = head;
             current->mark = true;
             while (current) {
@@ -83,7 +83,7 @@ public:
                         current->prev->next = current->next;
                         current->next->prev = current->prev;
                     }
-                    cout << value << " delete" << '\n';
+                    // cout << value << " delete" << '\n';
                     delete current;
                     break;
                 }
@@ -91,7 +91,7 @@ public:
             }
         }
 
-        cv.notify_all();
+        /*cv.notify_all();*/
     }
 
     // 찾기 함수
@@ -110,8 +110,14 @@ public:
     void displayList() {
         Node<T>* current = head;
         while (current) {
-            cout << current->data << " -> ";
-            current = current->next;
+
+            if(current->next == NULL){
+                cout << current->data;
+            }
+            else{
+                cout << current->data << " -> ";
+                current = current->next;
+            }
         }
         cout << endl;
     }

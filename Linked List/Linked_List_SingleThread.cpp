@@ -56,8 +56,6 @@ int main(void) {
     }
     makeend = clock();
 
-    // dll.displayList();
-
     //시작과 끝 시간을 이용한 list의 insert 시간 계산
     makeduration = (double)(makeend - makestart) / CLOCKS_PER_SEC;
 
@@ -138,7 +136,7 @@ int main(void) {
     //시작과 끝 시간을 이용한 list의 insert 시간 계산
     insduration = (double)(insend - insstart) / CLOCKS_PER_SEC;
 
-    dll.displayList();
+    // dll.displayList();
 
     cout << "Linked List Making Time : " << fixed << makeduration << "초\n";
     cout << "Linked List Minimum Time of Search : " << mintime << "초\n";
