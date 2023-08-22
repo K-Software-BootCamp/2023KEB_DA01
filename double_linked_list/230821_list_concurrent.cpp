@@ -14,17 +14,12 @@ int main(void) {
 
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> dis(1, 100000);
-
-
-    clock_t start, end;
-    double duration;
-    start = clock();
+    uniform_int_distribution<> dis(1, 1000000);
 
     vector<int> reference;
     int i = 0;
 
-    while (i != 40000)
+    while (i != 400000)
     {
 
         int randomValue = dis(gen);
@@ -56,41 +51,25 @@ int main(void) {
 
     }
 
-    end = clock();
-    duration = (double)(end - start) / CLOCKS_PER_SEC;
-
-
     for (int i = 0; i < reference.size(); i++) {
+        if(i = reference.size() -1){
+            cout << reference[i];
+        }
         cout << reference[i] << "->";
     }
 
-    cout << '\n' << '\n' << '\n' << '\n' << '\n' << '\n';
-
-   
-    //½ÃÀÛ°ú ³¡ ½Ã°£À» ÀÌ¿ëÇÑ listÀÇ insert ½Ã°£ °è»ê
-   
-
-
-
-
-
-   
-
-    //¸ÖÆ¼½º·¹µå¸¦ ÀÌ¿ëÇÑ »èÁ¦ °úÁ¤
-
-    clock_t start1, end1;
-    double duration1;
-    start1 = clock();
-
-
+    clock_t delstart, delend;
+    double delduration;
+    
+    delstart = clock();
 
     thread thread1([&]() {
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(1, 100000);
+        uniform_int_distribution<> dis(1, 1000000);
         int count1 = 0;
 
-        while (count1 < 5000) {
+        while (count1 < 50000) {
             int tmp = dis(gen);
             
              dll.deleteNode(tmp);
@@ -103,10 +82,10 @@ int main(void) {
 
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(1, 100000);
+        uniform_int_distribution<> dis(1, 1000000);
         int count2 = 0;
 
-        while (count2 < 5000) {
+        while (count2 < 50000) {
             int tmp = dis(gen);
         
 
@@ -120,10 +99,10 @@ int main(void) {
 
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(1, 100000);
+        uniform_int_distribution<> dis(1, 1000000);
         int count3 = 0;
 
-        while (count3 < 5000) {
+        while (count3 < 50000) {
             int tmp = dis(gen);
 
 
@@ -136,10 +115,10 @@ int main(void) {
     thread thread4([&]() {
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(1, 100000);
+        uniform_int_distribution<> dis(1, 1000000);
         int count4 = 0;
 
-        while (count4 < 5000) {
+        while (count4 < 50000) {
             int tmp = dis(gen);
 
 
@@ -155,27 +134,23 @@ int main(void) {
     thread3.join();
     thread4.join();
 
-    end1 = clock();
-    duration1 = (double)(end1 - start1) / CLOCKS_PER_SEC;
+    delend = clock();
+    delduration = (double)(delend - delstart) / CLOCKS_PER_SEC;
 
-    cout << "delete ÁøÇà ¿Ï·á\n\n\n";
+    cout << "delete ì™„ë£Œ\n\n\n";
 
-
-
-
-
-    clock_t start2, end2;
-    double duration2;
-    start2 = clock();
+    clock_t insstart, insend;
+    double insduration;
+    insstart = clock();
 
     thread thread5([&]() {
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(100001, 125000);
+        uniform_int_distribution<> dis(1000001, 1250000);
        
         int count5 = 0;
 
-        while (count5 < 5000) {
+        while (count5 < 50000) {
             int tmp = dis(gen);
 
 
@@ -190,10 +165,10 @@ int main(void) {
     thread thread6([&]() {
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(125001, 150000);
+        uniform_int_distribution<> dis(1250001, 1500000);
         int count6 = 0;
 
-        while (count6 < 5000) {
+        while (count6 < 50000) {
             int tmp = dis(gen);
             dll.insertNode(tmp);
 
@@ -207,11 +182,11 @@ int main(void) {
     thread thread7([&]() {
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(150001, 175000);
+        uniform_int_distribution<> dis(1500001, 1750000);
        
         int count7 = 0;
 
-        while (count7 < 5000) {
+        while (count7 < 50000) {
             int tmp = dis(gen);
 
 
@@ -223,10 +198,10 @@ int main(void) {
     thread thread8([&]() {
 
         mt19937 gen(rd());
-        uniform_int_distribution<> dis(175001, 200000);
+        uniform_int_distribution<> dis(1750001, 2000000);
         int count8 = 0;
 
-        while (count8 < 5000) {
+        while (count8 < 50000) {
             int tmp = dis(gen);
 
 
@@ -241,26 +216,14 @@ int main(void) {
     thread7.join();
     thread8.join();
 
-    end2 = clock();
-    //½ÃÀÛ°ú ³¡ ½Ã°£À» ÀÌ¿ëÇÑ listÀÇ insert ½Ã°£ °è»ê
-    duration2 = (double)(end2 - start2) / CLOCKS_PER_SEC;
-    cout << "Ãß°¡ insert ÁøÇà ¿Ï·á \n\n\n";
-
-
+    insend = clock();
+    insduration = (double)(insend - insstart) / CLOCKS_PER_SEC;
+    cout << "ì¶”ê°€ concurrent ë°©ì‹ì˜ insert ì§„í–‰ ì™„ë£Œ \n\n\n";
 
     dll.displayList();
 
-
-    cout << "\n\n\n\n";
-
-
-
-   
-    cout << "Time of single generation lsist: " << duration << "ÃÊ\n";
-    cout << "Time of multithread delete list : " << duration1 << "ÃÊ\n";
-    cout << "Time of add multithread generation list : " << duration2 << "ÃÊ\n";
-
-    cout << '\n';
+    cout << "Time of multithread delete list : " << delduration << "ì´ˆ\n";
+    cout << "Time of add multithread generation list : " << insduration << "ì´ˆ\n";
 
     return 0;
 }

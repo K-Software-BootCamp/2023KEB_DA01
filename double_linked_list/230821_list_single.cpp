@@ -4,36 +4,29 @@
 #include <vector>
 #include "230821_list_final.hpp"
 
-
 using namespace std;
 
-
-
 int main(void) {
-    DoublyLinkedList<int> dll; // list ∏∏µÈ∞Ì ¿Ã∏ß ¡ˆ¡§
+    DoublyLinkedList<int> dll; // list ÎßåÎì§Í≥† Ïù¥Î¶Ñ ÏßÄÏ†ï
 
-    clock_t start, end;
+    clock_t makestart, makeend;
     double duration;
-    start = clock();
-
 
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> dis(1, 100000);
+    uniform_int_distribution<> dis(1, 1000000);
 
 
     vector<int> reference;
 
     int i = 0;
 
-    while (i != 40000)
+    while (i != 400000)
     {
-
         int randomValue = dis(gen);
         if (i == 0)
         {
             reference.push_back(randomValue);
-            dll.insertNode(randomValue);
             i += 1;
         }
         else
@@ -51,144 +44,119 @@ int main(void) {
             if (good)
             {
                 reference.push_back(randomValue);
-                dll.insertNode(randomValue);
                 i += 1;
             }
         }
 
     }
 
-   
-
-    
-
-    end = clock();
+    makestart = clock();
+    for(int k = 0; k < reference.size(); k++){
+        dll.insertNode(reference[k]);
+    }
+    makeend = clock();
 
     for (int i = 0; i < reference.size(); i++) {
-        cout << reference[i] << "->";
+        if(i == reference.size()-1){
+            cout << reference[i];
+        }
+        else{
+            cout << reference[i] << "->";
+        }        
     }
 
-    cout << '\n' << '\n' << '\n' << '\n' << '\n' << '\n';
-    //Ω√¿€∞˙ ≥° Ω√∞£¿ª ¿ÃøÎ«— list¿« insert Ω√∞£ ∞ËªÍ
-    duration = (double)(end - start) / CLOCKS_PER_SEC;
-  
-
-
-
-
+    //ÏãúÏûëÍ≥º ÎÅù ÏãúÍ∞ÑÏùÑ Ïù¥Ïö©Ìïú listÏùò insert ÏãúÍ∞Ñ Í≥ÑÏÇ∞
+    duration = (double)(makeend - makestart) / CLOCKS_PER_SEC;
 
     int searchcnt = 0;
 
-    clock_t start1, end1;
-    double duration1;
+    clock_t searchstart, searchend;
+    double searchduration;
 
     double mintime, maxtime;
     double totaltime = 0;
     double meantime = 0;
 
 
-    while (searchcnt < 10000) {
+    while (searchcnt < 100000) {
         int searchnum = dis(gen);
 
-        start1 = clock();
+        searchstart = clock();
         dll.search(searchnum); // 
-        end1 = clock();
+        searchend = clock();
 
-        duration1 = (double)(end1 - start1) / CLOCKS_PER_SEC;
+        searchduration = (double)(searchend - searchstart) / CLOCKS_PER_SEC;
 
         if (searchcnt == 0) {
-            mintime = duration1;
-            maxtime = duration1;
+            mintime = searchduration;
+            maxtime = searchduration;
         }
 
         else {
-            if (mintime > duration1) {
-                mintime = duration1;
+            if (mintime > searchduration) {
+                mintime = searchduration;
             }
-            else if (maxtime < duration1) {
-                maxtime = duration1;
+            else if (maxtime < searchduration) {
+                maxtime = searchduration;
             }
         }
 
-        totaltime += duration1;
+        totaltime += searchduration;
 
         searchcnt++;
     }
 
     meantime = totaltime / (searchcnt + 1);
 
-
-
-
-
-
-
-    clock_t start2, end2;
-    double duration2;
-    start2 = clock();
-
-
+    clock_t delstart, delend;
+    double delduration;
+    delstart = clock();
    
-   
-    int count1 = 0;
+    int delcount = 0;
 
-    while (count1 < 20000) {
+    while (delcount < 200000) {
         int tmp = dis(gen);
 
         dll.deleteNode(tmp);
 
-        count1++;
+        delcount++;
     }
 
-    end2 = clock();
-    duration2 = (double)(end2 - start2) / CLOCKS_PER_SEC;
+    delend = clock();
+    delduration = (double)(delend - delstart) / CLOCKS_PER_SEC;
 
-    cout << "delete ¡¯«‡ øœ∑·\n";
+    cout << "delete ÏßÑÌñâ ÏôÑÎ£å\n";
 
-
-
-
-    clock_t start3, end3;
-    double duration3;
-    start3 = clock();
-
-
-
+    clock_t insstart, insend;
+    double insduration;
  
-    uniform_int_distribution<> dis2(100001, 200000);
- 
+    uniform_int_distribution<> dis2(1000001, 2000000);
     
-    int count2 = 0;
+    int inscount = 0;
 
-    while (count2 < 20000) {
+    insstart = clock();
+    while (inscount < 200000) {
         int tmp = dis2(gen);
 
         dll.insertNode(tmp);
 
-        count2++;
+        inscount++;
     }
 
-
-  
-
-
-    end3 = clock();
-    //Ω√¿€∞˙ ≥° Ω√∞£¿ª ¿ÃøÎ«— list¿« insert Ω√∞£ ∞ËªÍ
-    duration3 = (double)(end3 - start3) / CLOCKS_PER_SEC;
-    cout << "√ﬂ∞° insert ¡¯«‡ øœ∑· \n\n\n";
+    insend = clock();
+    //ÏãúÏûëÍ≥º ÎÅù ÏãúÍ∞ÑÏùÑ Ïù¥Ïö©Ìïú listÏùò insert ÏãúÍ∞Ñ Í≥ÑÏÇ∞
+    insduration = (double)(insend - insstart) / CLOCKS_PER_SEC;
+    cout << "Ï∂îÍ∞Ä insert ÏßÑÌñâ ÏôÑÎ£å \n\n\n";
 
     dll.displayList();
 
-    cout << "minimum time of search : " << fixed << mintime << "√ \n";
-    cout << "maximum time of search : " << maxtime << "√ \n";
-    cout << "total time of search : " << totaltime << "√ \n";
-    cout << "average time of search : " << meantime << "√ \n";
-
-    cout << '\n\n\n\n';
-    cout << "Time of single generation list : " << fixed << duration << "√ \n";
-    cout << "Time of single delete list : " << duration2 << "√ \n";
-    cout << "Time of additional insert list : " << duration3 << "√ \n";
+    cout << "minimum time of search : " << fixed << mintime << "Ï¥à\n";
+    cout << "maximum time of search : " << maxtime << "Ï¥à\n";
+    cout << "total time of search : " << totaltime << "Ï¥à\n";
     
+    cout << "Time of single generation list : " << fixed << duration << "Ï¥à\n";
+    cout << "Time of single delete list : " << delduration << "Ï¥à\n";
+    cout << "Time of additional insert list : " << insduration << "Ï¥à\n";
 
     return 0;
 }

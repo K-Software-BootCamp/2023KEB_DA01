@@ -30,13 +30,11 @@ int main() {
     srand(GetTickCount());
 
     int count = 0;
-    clock_t start, end;
-    double duration;
+    clock_t makestart, makeend;
+    double makeduration;
 
-    start = clock();
     while(count < 400000){
         int tmp = distribution(engine);
-        // int tmp = (int)(((double)((rand()<<15) | rand())) / (((RAND_MAX<<15) | RAND_MAX) + 1) * (90000))+1;
         int isSame = 0;
         for (int i = 0; i < treeData.size(); i++){
             if(tmp == treeData[i]){
@@ -47,17 +45,21 @@ int main() {
         
         if(isSame == 0){
             treeData.push_back(tmp);
-            rbTree.insert(treeData[count]);
             count++;
         }
     }
-    end = clock();
 
-    duration = (double)(end - start) / CLOCKS_PER_SEC;
+    makestart = clock();
+    for(int i = 0; i < 400000; i++){
+        rbTree.insert(treeData[i]);
+    }
+    makeend = clock();
+
+    makeduration = (double)(makeend - makestart) / CLOCKS_PER_SEC;
 
     cout << "Red-Black Tree:" << endl;
     rbTree.printTree(rbTree.getRoot());
-    cout << "Time of generation tree : " << duration << "초\n";
+    cout << "Time of generation tree : " << makeduration << "초\n";
 
     clock_t erasestart, eraseend, insertstart, insertend;
     double erasemultiruntime, insertmultiruntime;

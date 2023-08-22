@@ -19,7 +19,7 @@ public:
     Node<T>* prev;
     Node<T>* next;
     bool mark;
-    mutex mtx; // ¹ÂÅØ½º·Î ³ëµå¸¦ º¸È£ÇÔ.
+    mutex mtx; // ë®¤í…ìŠ¤ë¡œ ë…¸ë“œë¥¼ ë³´í˜¸í•¨.
     Node(T value) : data(value), prev(nullptr), next(nullptr), mark(false) {}
 };
 
@@ -34,7 +34,7 @@ private:
 public:
     DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
-    // ³ëµå »ğÀÔ ÇÔ¼ö
+    // ë…¸ë“œ ì‚½ì… í•¨ìˆ˜
     void insertNode(T value) {
         Node<T>* newNode = new Node<T>(value);
 
@@ -58,7 +58,7 @@ public:
 
 
 
-    // ³ëµå »èÁ¦ ÇÔ¼ö
+    // ë…¸ë“œ ì‚­ì œ í•¨ìˆ˜
     void deleteNode(T value) {
         {
             std::unique_lock<std::mutex> lock(listMtx);
@@ -94,7 +94,7 @@ public:
         cv.notify_all();
     }
 
-    // Ã£±â ÇÔ¼ö
+    // ì°¾ê¸° í•¨ìˆ˜
     bool search(T value) {
         Node<T>* current = head;
         while (current != nullptr) {
@@ -106,7 +106,7 @@ public:
         return false;
     }
 
-    // ¸®½ºÆ® Ãâ·Â ÇÔ¼ö
+    // ë¦¬ìŠ¤íŠ¸ ì¶œë ¥ í•¨ìˆ˜
     void displayList() {
         Node<T>* current = head;
         while (current) {
@@ -118,7 +118,7 @@ public:
 
 
 
-    // ¼Ò¸êÀÚ
+    // ì†Œë©¸ì
     ~DoublyLinkedList() {
         Node<T>* current = head;
         while (current) {
