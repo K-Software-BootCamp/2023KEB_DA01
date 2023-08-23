@@ -25,7 +25,18 @@
 - 각 자료구조의 관리를 concurrency 활용하는 방향으로 실행 (입력과 삭제 기능을 중심으로)
 - Concurrent 자료구조를 활용했을 때의 이점 분석
 
+## 프로그래밍 연습 깃허브
+- 자료구조팀 : https://github.com/nimjk/RedBlackTree
+- Concurrent팀 : https://github.com/nimjk/ConcurrentTree
+
 ## 참고 자료
+- C++ 관련
+    - 전문가를 위한 C++ 5TH EDITION (한빛미디어/Marc Gregoire 저서)
+    - 쉽게 배우는 알고리즘 : http://www.tcpschool.com/cpp/intro
+    - 코드 생성 연습용 사이트 : https://pythontutor.com/render.html#mode=edit
+    - C++ STL 모음 사이트 : https://web.archive.org/web/20160811224408/http://www.stepanovpapers.com/butler.hpl.hp/stl/stl/
+    - C++ 언어 관련 블로그 : https://inpa.tistory.com/
+
 - git 관련
     - git 활용 관련 영상 주소(mac) : https://youtu.be/Z9dvM7qgN9s
     - git 활용 관련 영상 주소(window 포함 및 상세) : https://www.youtube.com/watch?v=1I3hMwQU6GU&t=1365s
@@ -37,13 +48,16 @@
     - Linked List 관련
         - Lock-Free Linked Lists and Skip Lists (Mikhail Fomitchev, Eric Ruppert, York University, 2003) 
         - Double Linked list concurrency 적용 사례 : https://github.com/sysprog21/concurrent-ll        
+
     - Binary Tree 관련
         - Binary Tree 설명 및 구현 영상 : https://youtu.be/V97oYgN9cIE, https://youtu.be/zUt2KB2hTQg
         - Binary Tree 이론 및 코드 관련 기사 : https://simplesnippets.tech/what-is-binary-search-tree-bst-with-full-code-dsa/
 
     - Redblack Tree 관련 
         - 레드-블랙 트리 개념과 도식화 : https://www.youtube.com/watch?v=qvZGUFHWChY
+        - 레드-블랙 트리 그래픽 구현 사이트 : https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
         - 레드-블랙 트리 CAS 적용 : Lock-Free Red-Black Trees Using CAS (Jong Ho Kim, Helen Cameron, Peter Graham, 2011)
+
 
 - Concurreny(동시성) 관련 
     - 영상 참고 
@@ -64,16 +78,24 @@
             - Atomic 아토믹 소개 : https://www.youtube.com/@user-pw9fm4gc7e
             - Conroutines 코루틴 소개 : https://www.youtube.com/playlist?list=PLDV-cCQnUlIYc1FGC6FJRdHgPucxb7bzp
             - Multi process/thread 멀티 프로세스/스레드 소개 : https://youtu.be/QmtYKZC0lMU
-        
+
         - Concurrent Linked List : https://www.youtube.com/watch?v=eB0AlnK8iRI
 
+    -코드 참고
+        - Concurrent Red_Black Tree : https://github.com/JuanBesa/Concurrent-RedBlack-Tree
+
     - 홈페이지 참고 
+        - 동시성 프로그래밍 설명 : https://tech.devsisters.com/posts/programming-languages-5-concurrent-programming/
         - Multi-threading : https://cplusplus.com/reference/multithreading/
+        - 운영체제 관련 사이트 : https://pages.cs.wisc.edu/~remzi/OSTEP/
+        - Concurrent Red-Black Tree : https://www.sciencedirect.com/science/article/pii/S0743731512002912
 
     - 블로그 참고 
         - C++ 멀티스레딩 프로그래밍 : https://junstar92.tistory.com/336, https://junstar92.tistory.com/337
         - 아토믹 관련 : https://junstar92.tistory.com/298
         - [운영체제] Concurrency(동시성)과 Parallelism(병렬성) 이해 : https://spacebike.tistory.com/22
+
+- PDF 문헌 참고 자료는 해당 깃 Documents 폴더에 저장하였습니다.
 
 ## Acknowledgement
 ```
