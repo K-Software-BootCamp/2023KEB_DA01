@@ -113,6 +113,7 @@ public:
 
             if(current->next == NULL){
                 cout << current->data;
+                current = current->next;
             }
             else{
                 cout << current->data << " -> ";
